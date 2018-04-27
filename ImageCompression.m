@@ -12,14 +12,8 @@ dimU = size(U);
 dimS = size(S);
 dimV = size(V);
 %   Compute the best rank-1 approx to B
-k=1;
-rank1 = U(:,1:k)*S(1:k,1:k)*V(:,1:k)';
-%k=10;
-%rank10 = U(:,1:k)*S(1:k,1:k)*V(:,1:k)';
-%k=20;
-%rank20 = U(:,1:k)*S(1:k,1:k)*V(:,1:k)';
-
-rankN = rank1;
+n=20;
+rankN = U(:,1:n)*S(1:n,1:n)*V(:,1:n)';
 
 % three copies are necessary for RGB values
 C(:,:,1)=rankN;
