@@ -1,6 +1,8 @@
 % Application of Low Rank Approximation in Image Compression
+clear; close all;
+file='./Edgar.jpg';
 
-A=imread('./Edgar.jpg');    % 
+A=imread(file);    % 
 
 B=double(A(:,:,1))+1;       % converts A into double-precision format
 
@@ -12,7 +14,7 @@ dimU = size(U);
 dimS = size(S);
 dimV = size(V);
 %   Compute the best rank-1 approx to B
-n=20;
+n=100;  % change this value for rank number
 rankN = U(:,1:n)*S(1:n,1:n)*V(:,1:n)';
 
 % three copies are necessary for RGB values
@@ -27,3 +29,12 @@ C(:,:,:)=max(0,C(:,:,:));
 % view the resulting image
 figure
 image(C); axis equal; axis off;
+
+%find compression ratio
+in=imfinfo(file);
+imwrite(C,'rankNApproximation_Edgar.jpg'); 
+k=imfinfo('rankNApproximation_Edgar.jpg'); 
+original=in.FileSize;
+compressed=k.FileSize;
+compression_ratio=original/compressed;
+disp(compression_ratio);
